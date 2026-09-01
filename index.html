@@ -377,5 +377,159 @@ vocabulary exercises and more for English teachers.
     SUPABASE_KEY
   );
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const adminBox = document.createElement("section");
+
+  adminBox.innerHTML = `
+    <div style="
+      max-width:700px;
+      margin:50px auto;
+      padding:30px;
+      background:#f5f7fa;
+      border-radius:15px;
+      font-family:Arial,sans-serif;
+    ">
+
+      <h2>LESSOZA Admin</h2>
+
+      <div id="loginArea">
+        <h3>Admin Girişi</h3>
+
+        <input id="adminEmail"
+          type="email"
+          placeholder="E-posta"
+          style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;">
+
+        <input id="adminPassword"
+          type="password"
+          placeholder="Şifre"
+          style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;">
+
+        <button id="loginButton"
+          style="padding:12px 20px;cursor:pointer;">
+          Giriş Yap
+        </button>
+
+        <p id="loginMessage"></p>
+      </div>
+
+      <div id="uploadArea" style="display:none;">
+
+        <h3>Materyal Yükle</h3>
+
+        <input id="materialTitle"
+          type="text"
+          placeholder="Materyal adı"
+          style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;">
+
+        <input id="materialFile"
+          type="file"
+          accept=".pdf,.doc,.docx"
+          style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;">
+
+        <button id="uploadButton"
+          style="padding:12px 20px;cursor:pointer;">
+          Dosyayı Yükle
+        </button>
+
+        <button id="logoutButton"
+          style="padding:12px 20px;margin-left:10px;cursor:pointer;">
+          Çıkış Yap
+        </button>
+
+        <p id="uploadMessage"></p>
+
+      </div>
+
+    </div>
+  `;
+
+  document.body.appendChild(adminBox);
+
+  const loginArea = document.getElementById("loginArea");
+  const uploadArea = document.getElementById("uploadArea");
+
+  async function checkUser() {
+    const { data } = await supabase.auth.getSession();
+
+    if (data.session) {
+      loginArea.style.display = "none";
+      uploadArea.style.display = "block";
+    }
+  }
+
+  document.getElementById("loginButton").addEventListener("click", async function () {
+
+    const email = document.getElementById("adminEmail").value;
+    const password = document.getElementById("adminPassword").value;
+    const message = document.getElementById("loginMessage");
+
+    if (!email || !password) {
+      message.textContent = "E-posta ve şifre gerekli.";
+      return;
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      message.textContent = "Giriş başarısız: " + error.message;
+      return;
+    }
+
+    message.textContent = "Giriş başarılı.";
+
+    loginArea.style.display = "none";
+    uploadArea.style.display = "block";
+  });
+
+  document.getElementById("uploadButton").addEventListener("click", async function () {
+
+    const title = document.getElementById("materialTitle").value.trim();
+    const fileInput = document.getElementById("materialFile");
+    const message = document.getElementById("uploadMessage");
+
+    if (!title || !fileInput.files.length) {
+      message.textContent = "Materyal adı ve dosya seçmelisin.";
+      return;
+    }
+
+    const file = fileInput.files[0];
+
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+    const filePath = Date.now() + "_" + safeName;
+
+    message.textContent = "Dosya yükleniyor...";
+
+    const { error } = await supabase.storage
+      .from("material")
+      .upload(filePath, file);
+
+    if (error) {
+      message.textContent = "Yükleme başarısız: " + error.message;
+      return;
+    }
+
+    message.textContent = "Dosya başarıyla yüklendi: " + title;
+
+    document.getElementById("materialTitle").value = "";
+    fileInput.value = "";
+  });
+
+  document.getElementById("logoutButton").addEventListener("click", async function () {
+    await supabase.auth.signOut();
+
+    loginArea.style.display = "block";
+    uploadArea.style.display = "none";
+  });
+
+  checkUser();
+
+});
+</script>
 </body>
 </html>
