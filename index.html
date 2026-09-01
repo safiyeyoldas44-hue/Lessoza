@@ -395,6 +395,12 @@ document.addEventListener("DOMContentLoaded", function () {
       <h2>LESSOZA Admin</h2>
 
       <div id="loginArea">
+      <div id="resetArea" style="display:none;">
+  <h3>Yeni Şifre Belirle</h3>
+  <input id="newPassword" type="password" placeholder="Yeni şifre">
+  <button id="resetButton">Şifreyi Güncelle</button>
+  <p id="resetMessage"></p>
+</div>
         <h3>Admin Girişi</h3>
 
         <input id="adminEmail"
@@ -455,11 +461,37 @@ document.addEventListener("DOMContentLoaded", function () {
     const { data } = await supabase.auth.getSession();
 
     if (data.session) {
+      const { data: sessionData } = await supabase.auth.getSession();
+
+if (window.location.hash.includes("type=recovery")) {
+  document.getElementById("resetArea").style.display = "block";
+  document.getElementById("loginArea").style.display = "none";
+  document.getElementById("uploadArea").style.display = "none";
+}
       loginArea.style.display = "none";
       uploadArea.style.display = "block";
     }
   }
+document.getElementById("resetButton").addEventListener("click", async function () {
+  const newPassword = document.getElementById("newPassword").value;
+  const message = document.getElementById("resetMessage");
 
+  if (!newPassword) {
+    message.textContent = "Yeni şifre gerekli.";
+    return;
+  }
+
+  const { error } = await supabase.auth.updateUser({
+    password: newPassword
+  });
+
+  if (error) {
+    message.textContent = "Şifre güncellenemedi: " + error.message;
+    return;
+  }
+
+  message.textContent = "Şifren başarıyla güncellendi.";
+});
   document.getElementById("loginButton").addEventListener("click", async function () {
 
     const email = document.getElementById("adminEmail").value;
