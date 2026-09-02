@@ -472,24 +472,21 @@ async function checkUser() {
   }
 }
 document.getElementById("resetButton").addEventListener("click", async function () {
-  const newPassword = document.getElementById("newPassword").value;
+  const password = document.getElementById("newPassword").value;
   const message = document.getElementById("resetMessage");
 
-  if (!newPassword) {
-    message.textContent = "Yeni şifre gerekli.";
-    return;
-  }
+  message.textContent = "Şifre güncelleniyor...";
 
   const { error } = await supabase.auth.updateUser({
-    password: newPassword
+    password: password
   });
 
   if (error) {
-    message.textContent = "Şifre güncellenemedi: " + error.message;
+    message.textContent = "Hata: " + error.message;
     return;
   }
 
-  message.textContent = "Şifren başarıyla güncellendi.";
+  message.textContent = "Şifre başarıyla güncellendi!";
 });
   document.getElementById("loginButton").addEventListener("click", async function () {
 
