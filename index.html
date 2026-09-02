@@ -456,21 +456,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginArea = document.getElementById("loginArea");
   const uploadArea = document.getElementById("uploadArea");
 
-  async function checkUser() {
-    const { data } = await supabase.auth.getSession();
+async function checkUser() {
+  const { data } = await supabase.auth.getSession();
 
-    if (data.session) {
-      const { data: sessionData } = await supabase.auth.getSession();
-
-if (window.location.hash.includes("type=recovery")) {
-  document.getElementById("resetArea").style.display = "block";
-  document.getElementById("loginArea").style.display = "none";
-  document.getElementById("uploadArea").style.display = "none";
-}
-      loginArea.style.display = "none";
-      uploadArea.style.display = "block";
-    }
+  if (window.location.hash.includes("type=recovery")) {
+    document.getElementById("resetArea").style.display = "block";
+    document.getElementById("loginArea").style.display = "none";
+    document.getElementById("uploadArea").style.display = "none";
+    return;
   }
+
+  if (data.session) {
+    loginArea.style.display = "none";
+    uploadArea.style.display = "block";
+  }
+}
 document.getElementById("resetButton").addEventListener("click", async function () {
   const newPassword = document.getElementById("newPassword").value;
   const message = document.getElementById("resetMessage");
