@@ -366,19 +366,19 @@ vocabulary exercises and more for English teachers.
 <p><strong>LESSOZA</strong> · English Teaching Resources</p>
 <p>© 2026 LESSOZA. All rights reserved.</p>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-  const SUPABASE_URL = "https://scernlqpruniyaniyhao.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_z_tvKnYN8A5dYrR0WY7sww_VCA_FvLJ";
+const SUPABASE_URL = "https://scernlqpruniyaniyhao.supabase.co";
+const SUPABASE_KEY = "sb_publishable_z_tvKnYN8A5dYrR0WY7sww_VCA_FvLJ";
 
-  const supabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+const supabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+
+document.addEventListener("DOMContentLoaded", async function () {
 
   const adminBox = document.createElement("section");
 
@@ -414,156 +414,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
         <p id="loginMessage"></p>
       </div>
-<div id="resetArea" style="display:block;">
-  <h3>Yeni Şifre Belirle</h3>
-  <input id="newPassword" type="password" placeholder="Yeni şifre">
-  <button id="resetButton">Şifreyi Güncelle</button>
-  <p id="resetMessage"></p>
-</div>
-      <div id="uploadArea" style="display:none;">
 
-        <h3>Materyal Yükle</h3>
+      <div id="resetArea" style="display:none;">
+        <h3>Yeni Şifre Belirle</h3>
 
-        <input id="materialTitle"
-          type="text"
-          placeholder="Materyal adı"
+        <input id="newPassword"
+          type="password"
+          placeholder="Yeni şifre"
           style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;">
 
-        <input id="materialFile"
-          type="file"
-          accept=".pdf,.doc,.docx"
-          style="width:100%;padding:12px;margin:6px 0;box-sizing:border-box;">
-
-        <button id="uploadButton"
-          style="padding:12px 20px;cursor:pointer;">
-          Dosyayı Yükle
-        </button>
-
-        <button id="logoutButton"
-          style="padding:12px 20px;margin-left:10px;cursor:pointer;">
-          Çıkış Yap
-        </button>
-
-        <p id="uploadMessage"></p>
-
-      </div>
-
-    </div>
-  `;
-
-  document.body.appendChild(adminBox);
-
-  const loginArea = document.getElementById("loginArea");
-  const uploadArea = document.getElementById("uploadArea");
-
-async function checkUser() {
-  const { data } = await supabase.auth.getSession();
-
-  if (window.location.hash.includes("type=recovery")) {
-    document.getElementById("resetArea").style.display = "block";
-    document.getElementById("loginArea").style.display = "none";
-    document.getElementById("uploadArea").style.display = "none";
-    return;
-  }
-
-  if (data.session) {
-    loginArea.style.display = "none";
-    uploadArea.style.display = "block";
-  }
-}
-document.getElementById("resetButton").addEventListener("click", async function () {
-  const password = document.getElementById("newPassword").value;
-  const message = document.getElementById("resetMessage");
-
-  message.textContent = "Şifre güncelleniyor...";
-
-  const { error } = await supabase.auth.updateUser({
-    password: password
-  });
-
-  if (error) {
-    message.textContent = "Hata: " + error.message;
-    return;
-  }
-
-  message.textContent = "Şifre başarıyla güncellendi!";
-});
-  document.getElementById("loginButton").addEventListener("click", async function () {
-
-    const email = document.getElementById("adminEmail").value;
-    const password = document.getElementById("adminPassword").value;
-    const message = document.getElementById("loginMessage");
-
-    if (!email || !password) {
-      message.textContent = "E-posta ve şifre gerekli.";
-      return;
-    }
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password
-    });
-
-    if (error) {
-      message.textContent = "Giriş başarısız: " + error.message;
-      return;
-    }
-
-    message.textContent = "Giriş başarılı.";
-
-    loginArea.style.display = "none";
-    uploadArea.style.display = "block";
-  });
-
-  document.getElementById("uploadButton").addEventListener("click", async function () {
-
-    const title = document.getElementById("materialTitle").value.trim();
-    const fileInput = document.getElementById("materialFile");
-    const message = document.getElementById("uploadMessage");
-
-    if (!title || !fileInput.files.length) {
-      message.textContent = "Materyal adı ve dosya seçmelisin.";
-      return;
-    }
-
-    const file = fileInput.files[0];
-
-    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-    const filePath = Date.now() + "_" + safeName;
-
-    message.textContent = "Dosya yükleniyor...";
-
-    const { error } = await supabase.storage
-      .from("material")
-      .upload(filePath, file);
-
-    if (error) {
-      message.textContent = "Yükleme başarısız: " + error.message;
-      return;
-    }
-
-    message.textContent = "Dosya başarıyla yüklendi: " + title;
-
-    document.getElementById("materialTitle").value = "";
-    fileInput.value = "";
-  });
-
-  document.getElementById("logoutButton").addEventListener("click", async function () {
-    await supabase.auth.signOut();
-
-    loginArea.style.display = "block";
-    uploadArea.style.display = "none";
-  });
-supabase.auth.onAuthStateChange((event, session) => {
-  if (event === "PASSWORD_RECOVERY") {
-    document.getElementById("resetArea").style.display = "block";
-    document.getElementById("loginArea").style.display = "none";
-    document.getElementById("uploadArea").style.display = "none";
-  }
-});
-  checkUser();
-
-});
-</script>
-</body>
-</html>
+        <button id="resetButton"
+          style="padding:
