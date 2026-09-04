@@ -378,7 +378,7 @@ const supabase = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
-
+<script>
 document.addEventListener("DOMContentLoaded", async function () {
 
   const adminBox = document.createElement("section");
@@ -414,6 +414,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         </button>
 
         <p id="loginMessage"></p>
+
+        <button id="forgotButton"
+          style="padding:10px 15px;margin-top:10px;cursor:pointer;">
+          Şifremi Unuttum
+        </button>
+
+        <p id="forgotMessage"></p>
       </div>
 
       <div id="resetArea" style="display:none;">
@@ -469,61 +476,143 @@ document.addEventListener("DOMContentLoaded", async function () {
   const resetArea = document.getElementById("resetArea");
   const uploadArea = document.getElementById("uploadArea");
 
-  async function showCorrectArea() {
+  async function checkSession() {
 
     const {
-      data: { session }
+      data: { session },
+      error
     } = await supabase.auth.getSession();
 
-    const recovery =
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    const isRecovery =
       window.location.hash.includes("type=recovery") ||
       window.location.search.includes("code=");
 
-    if (recovery) {
-      resetArea.style.display = "block";
+    if (isRecovery) {
       loginArea.style.display = "none";
       uploadArea.style.display = "none";
+      resetArea.style.display = "block";
       return;
     }
 
     if (session) {
-      resetArea.style.display = "none";
       loginArea.style.display = "none";
+      resetArea.style.display = "none";
       uploadArea.style.display = "block";
     } else {
-      resetArea.style.display = "none";
       loginArea.style.display = "block";
+      resetArea.style.display = "none";
       uploadArea.style.display = "none";
     }
   }
 
-  supabase.auth.onAuthStateChange((event, session) => {
+  supabase.auth.onAuthStateChange(function (event, session) {
 
-    console.log("Supabase Auth Event:", event);
+    console.log("Supabase Auth:", event);
 
     if (event === "PASSWORD_RECOVERY") {
-      resetArea.style.display = "block";
       loginArea.style.display = "none";
       uploadArea.style.display = "none";
+      resetArea.style.display = "block";
     }
 
     if (event === "SIGNED_IN" && session) {
 
-      if (!window.location.hash.includes("type=recovery") &&
-          !window.location.search.includes("code=")) {
+      const isRecovery =
+        window.location.hash.includes("type=recovery") ||
+        window.location.search.includes("code=");
 
-        resetArea.style.display = "none";
+      if (!isRecovery) {
         loginArea.style.display = "none";
+        resetArea.style.display = "none";
         uploadArea.style.display = "block";
       }
     }
+
+    if (event === "SIGNED_OUT") {
+      loginArea.style.display = "block";
+      resetArea.style.display = "none";
+      uploadArea.style.display = "none";
+    }
   });
+
+
+  document.getElementById("loginButton").addEventListener("click", async function () {
+
+    const email = document.getElementById("adminEmail").value.trim();
+    const password = document.getElementById("adminPassword").value;
+    const message = document.getElementById("loginMessage");
+    const button = document.getElementById("loginButton");
+
+    if (!email || !password) {
+      message.textContent = "E-posta ve şifre gerekli.";
+      return;
+    }
+
+    button.disabled = true;
+    message.textContent = "Giriş yapılıyor...";
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      message.textContent = "Giriş başarısız: " + error.message;
+      button.disabled = false;
+      return;
+    }
+
+    message.textContent = "Giriş başarılı.";
+
+    loginArea.style.display = "none";
+    resetArea.style.display = "none";
+    uploadArea.style.display = "block";
+
+    button.disabled = false;
+  });
+
+
+  document.getElementById("forgotButton").addEventListener("click", async function () {
+
+    const email = document.getElementById("adminEmail").value.trim();
+    const message = document.getElementById("forgotMessage");
+
+    if (!email) {
+      message.textContent = "Önce e-posta adresini yaz.";
+      return;
+    }
+
+    message.textContent = "Şifre yenileme bağlantısı gönderiliyor...";
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + window.location.pathname
+    });
+
+    if (error) {
+      message.textContent = "Hata: " + error.message;
+      return;
+    }
+
+    message.textContent =
+      "Şifre yenileme bağlantısı e-posta adresine gönderildi.";
+  });
+
 
   document.getElementById("resetButton").addEventListener("click", async function () {
 
-    const password = document.getElementById("newPassword").value.trim();
-    const message = document.getElementById("resetMessage");
-    const button = document.getElementById("resetButton");
+    const password =
+      document.getElementById("newPassword").value.trim();
+
+    const message =
+      document.getElementById("resetMessage");
+
+    const button =
+      document.getElementById("resetButton");
 
     if (!password) {
       message.textContent = "Yeni şifre gerekli.";
@@ -536,30 +625,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     button.disabled = true;
-    message.textContent = "Oturum kontrol ediliyor...";
+    message.textContent = "Şifre güncelleniyor...";
 
     try {
-
-      const {
-        data: { session },
-        error: sessionError
-      } = await supabase.auth.getSession();
-
-      if (sessionError) {
-        message.textContent =
-          "Oturum kontrol edilemedi: " + sessionError.message;
-        button.disabled = false;
-        return;
-      }
-
-      if (!session) {
-        message.textContent =
-          "Şifre yenileme oturumu bulunamadı. Maildeki bağlantıyı yeniden aç.";
-        button.disabled = false;
-        return;
-      }
-
-      message.textContent = "Şifre güncelleniyor...";
 
       const { error } = await supabase.auth.updateUser({
         password: password
@@ -571,13 +639,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
       }
 
-      message.textContent = "Şifre başarıyla güncellendi!";
+      message.textContent =
+        "Şifre başarıyla güncellendi!";
 
       document.getElementById("newPassword").value = "";
 
       setTimeout(async function () {
 
         await supabase.auth.signOut();
+
+        window.location.hash = "";
 
         resetArea.style.display = "none";
         loginArea.style.display = "block";
@@ -592,58 +663,36 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       button.disabled = false;
     }
-
-  });
-
-
-  document.getElementById("loginButton").addEventListener("click", async function () {
-
-    const email = document.getElementById("adminEmail").value.trim();
-    const password = document.getElementById("adminPassword").value;
-    const message = document.getElementById("loginMessage");
-
-    if (!email || !password) {
-      message.textContent = "E-posta ve şifre gerekli.";
-      return;
-    }
-
-    message.textContent = "Giriş yapılıyor...";
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password
-    });
-
-    if (error) {
-      message.textContent = "Giriş başarısız: " + error.message;
-      return;
-    }
-
-    message.textContent = "Giriş başarılı.";
-
-    loginArea.style.display = "none";
-    resetArea.style.display = "none";
-    uploadArea.style.display = "block";
   });
 
 
   document.getElementById("uploadButton").addEventListener("click", async function () {
 
-    const title = document.getElementById("materialTitle").value.trim();
-    const fileInput = document.getElementById("materialFile");
-    const message = document.getElementById("uploadMessage");
+    const title =
+      document.getElementById("materialTitle").value.trim();
+
+    const fileInput =
+      document.getElementById("materialFile");
+
+    const message =
+      document.getElementById("uploadMessage");
 
     if (!title || !fileInput.files.length) {
-      message.textContent = "Materyal adı ve dosya seçmelisin.";
+      message.textContent =
+        "Materyal adı ve dosya seçmelisin.";
       return;
     }
 
     const file = fileInput.files[0];
 
-    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-    const filePath = Date.now() + "_" + safeName;
+    const safeName =
+      file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
 
-    message.textContent = "Dosya yükleniyor...";
+    const filePath =
+      Date.now() + "_" + safeName;
+
+    message.textContent =
+      "Dosya yükleniyor...";
 
     const { error } = await supabase.storage
       .from("material")
@@ -673,7 +722,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
 
-  await showCorrectArea();
+  await checkSession();
 
 });
 </script>
