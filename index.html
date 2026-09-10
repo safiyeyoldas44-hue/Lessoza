@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>LESSOZA | English Teaching Resources</title>
 
   <style>
@@ -14,40 +15,53 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #f7f9fc;
-      color: #1f2937;
+      background: #f7f8fc;
+      color: #222;
       line-height: 1.6;
     }
 
     header {
       background: #ffffff;
       border-bottom: 1px solid #e5e7eb;
-      padding: 20px 6%;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
+      gap: 20px;
     }
 
     .logo {
       font-size: 26px;
       font-weight: 800;
-      color: #2563eb;
+      letter-spacing: 2px;
+      color: #111827;
     }
 
     .logo span {
       display: block;
       font-size: 11px;
       letter-spacing: 2px;
-      color: #64748b;
-      font-weight: 600;
+      color: #6b7280;
+      margin-top: -4px;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
     }
 
     nav a {
       text-decoration: none;
       color: #374151;
-      margin-left: 22px;
       font-weight: 600;
     }
 
@@ -56,77 +70,81 @@
     }
 
     .hero {
-      text-align: center;
+      background: linear-gradient(135deg, #eef2ff, #ffffff);
       padding: 80px 20px;
-      background: linear-gradient(135deg, #eff6ff, #ffffff);
+      text-align: center;
     }
 
     .hero h1 {
       font-size: 46px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       color: #111827;
     }
 
     .hero p {
-      max-width: 700px;
+      max-width: 720px;
       margin: 0 auto 30px;
-      color: #64748b;
+      color: #6b7280;
       font-size: 18px;
     }
 
-    .search {
-      width: min(650px, 90%);
-      padding: 15px 20px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
+    .search-box {
+      width: 100%;
+      max-width: 650px;
+      padding: 16px 20px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
       font-size: 16px;
+      outline: none;
     }
 
-    section {
-      padding: 55px 6%;
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 20px;
     }
 
-    section h2 {
-      text-align: center;
-      margin-bottom: 30px;
+    .section-title {
       font-size: 30px;
+      margin-bottom: 25px;
+      color: #111827;
     }
 
     .levels {
       display: flex;
-      justify-content: center;
       gap: 12px;
       flex-wrap: wrap;
+      margin-bottom: 50px;
     }
 
-    .level {
-      padding: 12px 22px;
+    .level-btn {
       border: none;
-      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #d1d5db;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .level-btn:hover {
       background: #2563eb;
       color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .level:hover {
-      background: #1d4ed8;
     }
 
     .categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      margin-bottom: 60px;
     }
 
     .category {
-      background: white;
-      padding: 25px;
-      text-align: center;
-      border-radius: 12px;
+      background: #ffffff;
+      padding: 22px;
+      border-radius: 14px;
       border: 1px solid #e5e7eb;
-      font-weight: bold;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+      font-weight: 700;
     }
 
     .materials {
@@ -136,122 +154,42 @@
     }
 
     .material-card {
-      background: white;
+      background: #ffffff;
       padding: 25px;
-      border-radius: 12px;
+      border-radius: 14px;
       border: 1px solid #e5e7eb;
     }
 
     .material-card h3 {
       margin-bottom: 10px;
-      color: #1d4ed8;
+      color: #111827;
     }
 
     .material-card p {
-      color: #64748b;
-    }
-
-    .admin-section {
-      background: #eef2ff;
-      border-top: 1px solid #dbeafe;
-    }
-
-    .admin-box {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 14px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-
-    .admin-box h2 {
-      margin-bottom: 25px;
-    }
-
-    .admin-box h3 {
-      margin-bottom: 15px;
-    }
-
-    .admin-box input,
-    .admin-box textarea,
-    .admin-box select {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-
-    .admin-box textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .admin-button {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
+      color: #6b7280;
       margin-bottom: 10px;
     }
 
-    .admin-button:hover {
-      background: #1d4ed8;
-    }
-
-    .secondary-button {
-      background: #64748b;
-    }
-
-    .secondary-button:hover {
-      background: #475569;
-    }
-
-    .forgot-button {
-      background: transparent;
-      color: #2563eb;
-      border: none;
-      cursor: pointer;
-      display: block;
-      margin: 8px auto 0;
-      font-weight: 600;
-    }
-
-    .message {
-      margin-top: 12px;
-      padding: 10px;
+    .tag {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 5px 10px;
       border-radius: 7px;
-      display: none;
-      font-size: 14px;
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .success {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-    }
-
-    .error {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    #admin-panel,
-    #password-reset {
-      display: none;
-    }
-
-    .file-area {
-      margin-top: 25px;
-      padding-top: 25px;
+    .about {
+      background: #ffffff;
       border-top: 1px solid #e5e7eb;
+      padding: 60px 20px;
+    }
+
+    .about-inner {
+      max-width: 900px;
+      margin: auto;
+      text-align: center;
     }
 
     footer {
@@ -259,25 +197,131 @@
       color: white;
       text-align: center;
       padding: 30px 20px;
-      margin-top: 40px;
     }
 
-    footer p {
-      color: #9ca3af;
-      font-size: 14px;
+    /* ADMIN */
+
+    #adminSection {
+      display: none;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 30px 20px;
+    }
+
+    .admin-box {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .admin-box h2 {
+      margin-bottom: 25px;
+      color: #111827;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      font-size: 15px;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .admin-button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 13px 22px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+      margin-right: 8px;
+      margin-top: 5px;
+    }
+
+    .admin-button:hover {
+      background: #1d4ed8;
+    }
+
+    .logout-button {
+      background: #dc2626;
+    }
+
+    .logout-button:hover {
+      background: #b91c1c;
+    }
+
+    .forgot-button {
+      background: transparent;
+      color: #2563eb;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    #loginMessage,
+    #uploadMessage,
+    #resetMessage {
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    #loginArea,
+    #adminPanel,
+    #resetArea {
+      display: none;
+    }
+
+    .admin-link {
+      cursor: pointer;
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    .material-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #2563eb;
+      font-weight: 700;
+      text-decoration: none;
     }
 
     @media (max-width: 700px) {
+      header {
+        padding: 18px 20px;
+      }
+
+      .header-inner {
+        flex-direction: column;
+      }
+
       .hero h1 {
         font-size: 34px;
       }
 
-      header {
+      nav {
         justify-content: center;
-      }
-
-      nav a {
-        margin: 0 7px;
       }
     }
   </style>
@@ -286,51 +330,62 @@
 <body>
 
 <header>
-  <div class="logo">
-    LESSOZA
-    <span>ENGLISH TEACHING RESOURCES</span>
-  </div>
+  <div class="header-inner">
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#categories">Categories</a>
-    <a href="#materials">Materials</a>
-    <a href="#about">About</a>
-  </nav>
+    <div class="logo">
+      LESSOZA
+      <span>ENGLISH TEACHING RESOURCES</span>
+    </div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#materials">Materials</a>
+      <a href="#about">About</a>
+      <a href="#admin" class="admin-link" onclick="openAdmin()">
+        Admin
+      </a>
+    </nav>
+
+  </div>
 </header>
 
-<main>
 
 <section class="hero" id="home">
+
   <h1>Better materials. Better English lessons.</h1>
+
   <p>
     Worksheets, grammar activities, reading materials,
     vocabulary exercises and more for English teachers.
   </p>
 
   <input
-    class="search"
-    id="searchInput"
     type="text"
+    id="searchInput"
+    class="search-box"
     placeholder="Search for a material..."
+    oninput="searchMaterials()"
   >
+
 </section>
 
-<section>
-  <h2>Choose Your Level</h2>
+
+<div class="container">
+
+  <h2 class="section-title">Levels</h2>
 
   <div class="levels">
-    <button class="level" data-level="A1">A1</button>
-    <button class="level" data-level="A2">A2</button>
-    <button class="level" data-level="B1">B1</button>
-    <button class="level" data-level="B2">B2</button>
-    <button class="level" data-level="C1">C1</button>
-    <button class="level" data-level="C2">C2</button>
+    <button class="level-btn" onclick="filterLevel('A1')">A1</button>
+    <button class="level-btn" onclick="filterLevel('A2')">A2</button>
+    <button class="level-btn" onclick="filterLevel('B1')">B1</button>
+    <button class="level-btn" onclick="filterLevel('B2')">B2</button>
+    <button class="level-btn" onclick="filterLevel('C1')">C1</button>
+    <button class="level-btn" onclick="filterLevel('C2')">C2</button>
   </div>
-</section>
 
-<section id="categories">
-  <h2>Categories</h2>
+
+  <h2 class="section-title" id="categories">Categories</h2>
 
   <div class="categories">
     <div class="category">Grammar</div>
@@ -342,179 +397,280 @@
     <div class="category">Worksheets</div>
     <div class="category">Exams & Quizzes</div>
   </div>
-</section>
 
-<section id="materials">
-  <h2>Latest Materials</h2>
+
+  <h2 class="section-title" id="materials">Latest Materials</h2>
 
   <div class="materials" id="materialsList">
 
     <div class="material-card">
-      <h3>B1 Grammar Present Perfect Worksheet</h3>
-      <p>Practice activities for the Present Perfect tense.</p>
+      <span class="tag">B1 · Grammar</span>
+      <h3>Present Perfect Worksheet</h3>
+      <p>
+        Grammar practice worksheet for Present Perfect.
+      </p>
     </div>
 
     <div class="material-card">
-      <h3>A2 Vocabulary Irregular Verbs Practice</h3>
-      <p>Useful exercises for learning irregular verbs.</p>
+      <span class="tag">A2 · Vocabulary</span>
+      <h3>Irregular Verbs Practice</h3>
+      <p>
+        Vocabulary practice with common irregular verbs.
+      </p>
     </div>
 
     <div class="material-card">
-      <h3>B1 Reading Travel Reading</h3>
-      <p>A reading activity about travelling and holidays.</p>
+      <span class="tag">B1 · Reading</span>
+      <h3>Travel Reading</h3>
+      <p>
+        Reading activity about travelling and holidays.
+      </p>
     </div>
 
   </div>
+
+</div>
+
+
+<section class="about" id="about">
+
+  <div class="about-inner">
+
+    <h2 class="section-title">About LESSOZA</h2>
+
+    <p>
+      LESSOZA is an English teaching resource platform
+      designed to help teachers find and share useful
+      classroom materials.
+    </p>
+
+  </div>
+
 </section>
 
-<section id="about">
-  <h2>About LESSOZA</h2>
 
-  <p style="max-width:800px;margin:auto;text-align:center;color:#64748b;">
-    LESSOZA is an English teaching resource platform designed
-    to make useful classroom materials easier to find and share.
-  </p>
-</section>
+<!-- ADMIN SECTION -->
 
-<section class="admin-section">
+<section id="adminSection">
+
   <div class="admin-box">
 
-    <!-- LOGIN -->
-    <div id="admin-login">
+    <div id="loginArea">
 
-      <h2>LESSOZA Admin</h2>
+      <h2>Admin Girişi</h2>
 
-      <h3>Admin Girişi</h3>
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Email adresiniz"
+        >
+      </div>
 
-      <input
-        type="email"
-        id="admin-email"
-        placeholder="E-posta"
-        autocomplete="email"
+      <div class="form-group">
+        <label for="loginPassword">Şifre</label>
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Şifreniz"
+        >
+      </div>
+
+      <button
+        class="admin-button"
+        onclick="loginAdmin()"
       >
-
-      <input
-        type="password"
-        id="admin-password"
-        placeholder="Şifre"
-        autocomplete="current-password"
-      >
-
-      <button class="admin-button" id="admin-login-btn">
         Giriş Yap
       </button>
 
-      <button class="forgot-button" id="forgot-password-btn">
+      <br>
+
+      <button
+        class="forgot-button"
+        onclick="showResetArea()"
+      >
         Şifremi Unuttum
       </button>
 
-      <div id="admin-message" class="message"></div>
+      <div id="loginMessage"></div>
 
     </div>
 
+
     <!-- PASSWORD RESET -->
-    <div id="password-reset">
+
+    <div id="resetArea">
 
       <h2>Yeni Şifre Belirle</h2>
 
-      <input
-        type="password"
-        id="new-password"
-        placeholder="Yeni şifre"
-        autocomplete="new-password"
-      >
+      <div class="form-group">
+        <label for="newPassword">Yeni Şifre</label>
 
-      <button class="admin-button" id="update-password-btn">
+        <input
+          type="password"
+          id="newPassword"
+          placeholder="Yeni şifreniz"
+        >
+      </div>
+
+      <button
+        class="admin-button"
+        onclick="updatePassword()"
+      >
         Şifreyi Güncelle
       </button>
 
-      <div id="password-message" class="message"></div>
+      <div id="resetMessage"></div>
 
     </div>
 
+
     <!-- ADMIN PANEL -->
-    <div id="admin-panel">
 
-      <h2>LESSOZA Admin Panel</h2>
+    <div id="adminPanel">
 
-      <p style="margin-bottom:20px;color:#64748b;">
-        Materyal yüklemek için aşağıdaki alanları doldurun.
-      </p>
+      <h2>LESSOZA Admin</h2>
 
-      <input
-        type="text"
-        id="material-title"
-        placeholder="Materyal başlığı"
+      <div class="form-group">
+
+        <label for="materialTitle">
+          Material Title
+        </label>
+
+        <input
+          type="text"
+          id="materialTitle"
+          placeholder="Örneğin: Present Perfect Worksheet"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="materialDescription">
+          Description
+        </label>
+
+        <textarea
+          id="materialDescription"
+          placeholder="Material açıklaması"
+        ></textarea>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="materialLevel">
+          Level
+        </label>
+
+        <select id="materialLevel">
+
+          <option value="A1">A1</option>
+          <option value="A2">A2</option>
+          <option value="B1">B1</option>
+          <option value="B2">B2</option>
+          <option value="C1">C1</option>
+          <option value="C2">C2</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="materialCategory">
+          Category
+        </label>
+
+        <select id="materialCategory">
+
+          <option value="Grammar">Grammar</option>
+          <option value="Vocabulary">Vocabulary</option>
+          <option value="Reading">Reading</option>
+          <option value="Listening">Listening</option>
+          <option value="Speaking">Speaking</option>
+          <option value="Writing">Writing</option>
+          <option value="Worksheets">Worksheets</option>
+          <option value="Exams & Quizzes">
+            Exams & Quizzes
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="materialFile">
+          PDF / Word File
+        </label>
+
+        <input
+          type="file"
+          id="materialFile"
+          accept=".pdf,.doc,.docx"
+        >
+
+      </div>
+
+
+      <button
+        class="admin-button"
+        onclick="uploadMaterial()"
       >
-
-      <textarea
-        id="material-description"
-        placeholder="Açıklama"
-      ></textarea>
-
-      <select id="material-level">
-        <option value="">Seviye seçin</option>
-        <option value="A1">A1</option>
-        <option value="A2">A2</option>
-        <option value="B1">B1</option>
-        <option value="B2">B2</option>
-        <option value="C1">C1</option>
-        <option value="C2">C2</option>
-      </select>
-
-      <select id="material-category">
-        <option value="">Kategori seçin</option>
-        <option value="Grammar">Grammar</option>
-        <option value="Vocabulary">Vocabulary</option>
-        <option value="Reading">Reading</option>
-        <option value="Listening">Listening</option>
-        <option value="Speaking">Speaking</option>
-        <option value="Writing">Writing</option>
-        <option value="Worksheets">Worksheets</option>
-        <option value="Exams & Quizzes">Exams & Quizzes</option>
-      </select>
-
-      <input
-        type="file"
-        id="material-file"
-        accept=".pdf,.doc,.docx"
-      >
-
-      <button class="admin-button" id="upload-btn">
-        Materyal Yükle
+        Upload Material
       </button>
 
-      <div id="upload-message" class="message"></div>
 
-      <div class="file-area">
-        <button
-          class="admin-button secondary-button"
-          id="logout-btn"
-        >
-          Çıkış Yap
-        </button>
-      </div>
+      <button
+        class="admin-button logout-button"
+        onclick="logoutAdmin()"
+      >
+        Logout
+      </button>
+
+
+      <div id="uploadMessage"></div>
 
     </div>
 
   </div>
+
 </section>
 
-</main>
 
 <footer>
-  <strong>LESSOZA · English Teaching Resources</strong>
-  <p>© 2026 LESSOZA. All rights reserved.</p>
+
+  <p>
+    LESSOZA · English Teaching Resources
+  </p>
+
+  <p>
+    © 2026 LESSOZA. All rights reserved.
+  </p>
+
 </footer>
 
+
 <!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <script>
-  const SUPABASE_URL = "https://scernlqpruniyaniyhao.supabase.co";
+
+  const SUPABASE_URL =
+    "https://scernlqpruniyaniyhao.supabase.co";
 
   const SUPABASE_KEY =
     "sb_publishable_z_tvKnYN8A5dYrR0WY7sww_VCA_FvLJ";
+
 
   const supabaseClient =
     window.supabase.createClient(
@@ -523,129 +679,223 @@
     );
 
 
-  /* =========================
-     ELEMENTS
-  ========================= */
+  /* ---------------------------------
+     ADMIN OPEN
+  --------------------------------- */
 
-  const adminLogin =
-    document.getElementById("admin-login");
+  function openAdmin() {
 
-  const adminPanel =
-    document.getElementById("admin-panel");
+    document.getElementById("adminSection").style.display =
+      "block";
 
-  const passwordReset =
-    document.getElementById("password-reset");
+    document.getElementById("adminSection")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
 
-  const adminEmail =
-    document.getElementById("admin-email");
+    checkSession();
 
-  const adminPassword =
-    document.getElementById("admin-password");
-
-  const adminMessage =
-    document.getElementById("admin-message");
-
-  const passwordMessage =
-    document.getElementById("password-message");
-
-  const uploadMessage =
-    document.getElementById("upload-message");
-
-
-  /* =========================
-     MESSAGE FUNCTION
-  ========================= */
-
-  function showMessage(element, text, type) {
-    element.textContent = text;
-    element.className = "message " + type;
   }
 
 
-  /* =========================
+  /* ---------------------------------
+     SESSION CONTROL
+  --------------------------------- */
+
+  async function checkSession() {
+
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.getSession();
+
+
+    if (error) {
+
+      console.error(error);
+
+      return;
+
+    }
+
+
+    if (data.session) {
+
+      document.getElementById("loginArea").style.display =
+        "none";
+
+      document.getElementById("resetArea").style.display =
+        "none";
+
+      document.getElementById("adminPanel").style.display =
+        "block";
+
+    } else {
+
+      document.getElementById("loginArea").style.display =
+        "block";
+
+      document.getElementById("adminPanel").style.display =
+        "none";
+
+    }
+
+  }
+
+
+  /* ---------------------------------
      LOGIN
-  ========================= */
+  --------------------------------- */
 
-  document
-    .getElementById("admin-login-btn")
-    .addEventListener("click", async function () {
+  async function loginAdmin() {
 
-      const email =
-        adminEmail.value.trim();
+    const email =
+      document.getElementById("loginEmail").value.trim();
 
-      const password =
-        adminPassword.value;
+    const password =
+      document.getElementById("loginPassword").value;
 
-      if (!email || !password) {
-        showMessage(
-          adminMessage,
-          "Lütfen e-posta ve şifrenizi girin.",
-          "error"
-        );
-        return;
-      }
 
-      this.disabled = true;
-      this.textContent = "Giriş yapılıyor...";
+    const message =
+      document.getElementById("loginMessage");
 
-      const { data, error } =
-        await supabaseClient.auth.signInWithPassword({
-          email: email,
-          password: password
-        });
 
-      this.disabled = false;
-      this.textContent = "Giriş Yap";
+    message.innerText =
+      "Giriş yapılıyor...";
 
-      if (error) {
-        showMessage(
-          adminMessage,
-          "Giriş başarısız: " + error.message,
-          "error"
-        );
-        return;
-      }
 
-      if (data && data.user) {
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.signInWithPassword({
 
-        adminLogin.style.display = "none";
-        passwordReset.style.display = "none";
-        adminPanel.style.display = "block";
+      email: email,
 
-        showMessage(
-          adminMessage,
-          "Giriş başarılı.",
-          "success"
-        );
-      }
+      password: password
+
     });
 
 
-  /* =========================
+    if (error) {
+
+      console.error(error);
+
+      message.innerText =
+        "Giriş başarısız: " + error.message;
+
+      return;
+
+    }
+
+
+    message.innerText =
+      "Giriş başarılı.";
+
+
+    document.getElementById("loginArea").style.display =
+      "none";
+
+    document.getElementById("resetArea").style.display =
+      "none";
+
+    document.getElementById("adminPanel").style.display =
+      "block";
+
+  }
+
+
+  /* ---------------------------------
+     PASSWORD RESET
+  --------------------------------- */
+
+  function showResetArea() {
+
+    document.getElementById("loginArea").style.display =
+      "none";
+
+    document.getElementById("resetArea").style.display =
+      "block";
+
+  }
+
+
+  async function updatePassword() {
+
+    const newPassword =
+      document.getElementById("newPassword").value;
+
+    const message =
+      document.getElementById("resetMessage");
+
+
+    if (!newPassword || newPassword.length < 6) {
+
+      message.innerText =
+        "Şifre en az 6 karakter olmalıdır.";
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient.auth.updateUser({
+
+      password: newPassword
+
+    });
+
+
+    if (error) {
+
+      console.error(error);
+
+      message.innerText =
+        "Şifre güncellenemedi: " +
+        error.message;
+
+      return;
+
+    }
+
+
+    message.innerText =
+      "Şifreniz başarıyla güncellendi.";
+
+  }
+
+
+  /* ---------------------------------
      FORGOT PASSWORD
-  ========================= */
+  --------------------------------- */
 
-  document
-    .getElementById("forgot-password-btn")
-    .addEventListener("click", async function () {
+  async function sendResetEmail() {
 
-      const email =
-        adminEmail.value.trim();
+    const email =
+      document.getElementById("loginEmail").value.trim();
 
-      if (!email) {
-        showMessage(
-          adminMessage,
-          "Önce e-posta adresinizi yazın.",
-          "error"
-        );
-        return;
-      }
 
-      this.disabled = true;
-      this.textContent = "Gönderiliyor...";
+    const message =
+      document.getElementById("loginMessage");
 
-      const { error } =
-        await supabaseClient.auth.resetPasswordForEmail(
+
+    if (!email) {
+
+      message.innerText =
+        "Önce email adresinizi yazın.";
+
+      return;
+
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .resetPasswordForEmail(
           email,
           {
             redirectTo:
@@ -654,379 +904,379 @@
           }
         );
 
-      this.disabled = false;
-      this.textContent = "Şifremi Unuttum";
 
-      if (error) {
-        showMessage(
-          adminMessage,
-          "Şifre sıfırlama başarısız: " +
-          error.message,
-          "error"
+    if (error) {
+
+      console.error(error);
+
+      message.innerText =
+        "Şifre sıfırlama başarısız: " +
+        error.message;
+
+      return;
+
+    }
+
+
+    message.innerText =
+      "Şifre sıfırlama bağlantısı email adresinize gönderildi.";
+
+  }
+
+
+  /* ---------------------------------
+     LOGOUT
+  --------------------------------- */
+
+  async function logoutAdmin() {
+
+    await supabaseClient.auth.signOut();
+
+    document.getElementById("adminPanel").style.display =
+      "none";
+
+    document.getElementById("loginArea").style.display =
+      "block";
+
+  }
+
+
+  /* ---------------------------------
+     MATERIAL UPLOAD
+  --------------------------------- */
+
+  async function uploadMaterial() {
+
+    const title =
+      document.getElementById("materialTitle")
+        .value.trim();
+
+
+    const description =
+      document.getElementById("materialDescription")
+        .value.trim();
+
+
+    const level =
+      document.getElementById("materialLevel")
+        .value;
+
+
+    const category =
+      document.getElementById("materialCategory")
+        .value;
+
+
+    const file =
+      document.getElementById("materialFile")
+        .files[0];
+
+
+    const message =
+      document.getElementById("uploadMessage");
+
+
+    message.innerText =
+      "";
+
+
+    if (!title) {
+
+      message.innerText =
+        "Lütfen material başlığı girin.";
+
+      return;
+
+    }
+
+
+    if (!file) {
+
+      message.innerText =
+        "Lütfen bir PDF veya Word dosyası seçin.";
+
+      return;
+
+    }
+
+
+    /* ---------------------------------
+       FILE PATH
+    --------------------------------- */
+
+    const safeFileName =
+      file.name
+        .replace(/[^a-zA-Z0-9._-]/g, "_");
+
+
+    const filePath =
+      Date.now() +
+      "_" +
+      safeFileName;
+
+
+    message.innerText =
+      "Dosya yükleniyor...";
+
+
+    /* ---------------------------------
+       BUCKET CONTROL
+       
+       Önce Materials deneniyor.
+       Olmazsa materials deneniyor.
+    --------------------------------- */
+
+    let bucketName = "Materials";
+
+
+    let {
+      data: uploadData,
+      error: uploadError
+    } =
+      await supabaseClient.storage
+        .from("Materials")
+        .upload(
+          filePath,
+          file
         );
-        return;
+
+
+    if (
+      uploadError &&
+      uploadError.message
+        .toLowerCase()
+        .includes("bucket not found")
+    ) {
+
+      bucketName = "materials";
+
+
+      const retry =
+        await supabaseClient.storage
+          .from("materials")
+          .upload(
+            filePath,
+            file
+          );
+
+
+      uploadData =
+        retry.data;
+
+      uploadError =
+        retry.error;
+
+    }
+
+
+    if (uploadError) {
+
+      console.error(
+        "UPLOAD ERROR:",
+        uploadError
+      );
+
+
+      message.innerText =
+        "Yükleme başarısız: " +
+        uploadError.message;
+
+      return;
+
+    }
+
+
+    message.innerText =
+      "Dosya yüklendi. Bilgiler kaydediliyor...";
+
+
+    /* ---------------------------------
+       PUBLIC URL
+    --------------------------------- */
+
+    const {
+      data: publicUrlData
+    } =
+      supabaseClient.storage
+        .from(bucketName)
+        .getPublicUrl(filePath);
+
+
+    const fileUrl =
+      publicUrlData.publicUrl;
+
+
+    /* ---------------------------------
+       DATABASE
+    --------------------------------- */
+
+    const {
+      data: materialData,
+      error: materialError
+    } =
+      await supabaseClient
+        .from("Materials")
+        .insert([
+
+          {
+
+            title: title,
+
+            description: description,
+
+            level: level,
+
+            kategori: category,
+
+            file_url: fileUrl
+
+          }
+
+        ])
+        .select();
+
+
+    if (materialError) {
+
+      console.error(
+        "DATABASE ERROR:",
+        materialError
+      );
+
+
+      message.innerText =
+        "Dosya yüklendi fakat bilgiler kaydedilemedi: " +
+        materialError.message;
+
+      return;
+
+    }
+
+
+    message.innerText =
+      "Material başarıyla yüklendi!";
+
+
+    /* ---------------------------------
+       FORM TEMİZLE
+    --------------------------------- */
+
+    document.getElementById("materialTitle")
+      .value = "";
+
+
+    document.getElementById("materialDescription")
+      .value = "";
+
+
+    document.getElementById("materialFile")
+      .value = "";
+
+  }
+
+
+  /* ---------------------------------
+     SEARCH
+  --------------------------------- */
+
+  function searchMaterials() {
+
+    const search =
+      document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    const cards =
+      document.querySelectorAll(
+        ".material-card"
+      );
+
+
+    cards.forEach(function(card) {
+
+      const text =
+        card.innerText.toLowerCase();
+
+
+      if (text.includes(search)) {
+
+        card.style.display =
+          "block";
+
+      } else {
+
+        card.style.display =
+          "none";
+
       }
 
-      showMessage(
-        adminMessage,
-        "Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.",
-        "success"
+    });
+
+  }
+
+
+  /* ---------------------------------
+     LEVEL FILTER
+  --------------------------------- */
+
+  function filterLevel(level) {
+
+    const cards =
+      document.querySelectorAll(
+        ".material-card"
       );
+
+
+    cards.forEach(function(card) {
+
+      const text =
+        card.innerText.toUpperCase();
+
+
+      if (text.includes(level)) {
+
+        card.style.display =
+          "block";
+
+      } else {
+
+        card.style.display =
+          "none";
+
+      }
+
     });
 
 
-  /* =========================
-     PASSWORD UPDATE
-  ========================= */
+    document.getElementById("materials")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
 
-  document
-    .getElementById("update-password-btn")
-    .addEventListener("click", async function () {
-
-      const newPassword =
-        document
-          .getElementById("new-password")
-          .value;
-
-      if (!newPassword) {
-        showMessage(
-          passwordMessage,
-          "Lütfen yeni şifrenizi girin.",
-          "error"
-        );
-        return;
-      }
-
-      if (newPassword.length < 6) {
-        showMessage(
-          passwordMessage,
-          "Şifre en az 6 karakter olmalıdır.",
-          "error"
-        );
-        return;
-      }
-
-      this.disabled = true;
-      this.textContent = "Güncelleniyor...";
-
-      const { error } =
-        await supabaseClient.auth.updateUser({
-          password: newPassword
-        });
-
-      this.disabled = false;
-      this.textContent = "Şifreyi Güncelle";
-
-      if (error) {
-        showMessage(
-          passwordMessage,
-          "Şifre güncellenemedi: " +
-          error.message,
-          "error"
-        );
-        return;
-      }
-
-      showMessage(
-        passwordMessage,
-        "Şifreniz başarıyla güncellendi.",
-        "success"
-      );
-
-      setTimeout(function () {
-        passwordReset.style.display = "none";
-        adminLogin.style.display = "block";
-      }, 1500);
-    });
+  }
 
 
-  /* =========================
-     AUTH STATE
-  ========================= */
+  /* ---------------------------------
+     INITIAL SESSION CHECK
+  --------------------------------- */
 
   supabaseClient.auth.onAuthStateChange(
-    function (event, session) {
+    function(event, session) {
 
-      if (event === "PASSWORD_RECOVERY") {
+      if (session) {
 
-        adminLogin.style.display = "none";
-        adminPanel.style.display = "none";
-        passwordReset.style.display = "block";
+        document.getElementById("loginArea").style.display =
+          "none";
 
-      } else if (
-        session &&
-        session.user &&
-        event !== "SIGNED_OUT"
-      ) {
+        document.getElementById("adminPanel").style.display =
+          "block";
 
-        adminLogin.style.display = "none";
-        passwordReset.style.display = "none";
-        adminPanel.style.display = "block";
-
-      } else if (event === "SIGNED_OUT") {
-
-        adminLogin.style.display = "block";
-        passwordReset.style.display = "none";
-        adminPanel.style.display = "none";
       }
+
     }
   );
 
-
-  /* =========================
-     CHECK EXISTING SESSION
-  ========================= */
-
-  async function checkSession() {
-
-    const { data } =
-      await supabaseClient.auth.getSession();
-
-    if (
-      data &&
-      data.session &&
-      data.session.user
-    ) {
-
-      adminLogin.style.display = "none";
-      passwordReset.style.display = "none";
-      adminPanel.style.display = "block";
-
-    } else {
-
-      adminLogin.style.display = "block";
-      passwordReset.style.display = "none";
-      adminPanel.style.display = "none";
-    }
-  }
-
-  checkSession();
-
-
-  /* =========================
-     LOGOUT
-  ========================= */
-
-  document
-    .getElementById("logout-btn")
-    .addEventListener("click", async function () {
-
-      await supabaseClient.auth.signOut();
-
-      adminPanel.style.display = "none";
-      passwordReset.style.display = "none";
-      adminLogin.style.display = "block";
-
-      adminEmail.value = "";
-      adminPassword.value = "";
-
-      showMessage(
-        adminMessage,
-        "Çıkış yapıldı.",
-        "success"
-      );
-    });
-
-
-  /* =========================
-     UPLOAD MATERIAL
-  ========================= */
-
-  document
-    .getElementById("upload-btn")
-    .addEventListener("click", async function () {
-
-      const title =
-        document
-          .getElementById("material-title")
-          .value.trim();
-
-      const description =
-        document
-          .getElementById("material-description")
-          .value.trim();
-
-      const level =
-        document
-          .getElementById("material-level")
-          .value;
-
-      const category =
-        document
-          .getElementById("material-category")
-          .value;
-
-      const file =
-        document
-          .getElementById("material-file")
-          .files[0];
-
-      if (!title || !file) {
-        showMessage(
-          uploadMessage,
-          "Başlık ve dosya seçmeniz gerekiyor.",
-          "error"
-        );
-        return;
-      }
-
-      this.disabled = true;
-      this.textContent = "Yükleniyor...";
-
-      try {
-
-        const safeName =
-          file.name
-            .replace(/[^a-zA-Z0-9._-]/g, "_");
-
-        const filePath =
-          Date.now() + "_" + safeName;
-
-        const { error: uploadError } =
-          await supabaseClient.storage
-            .from("Materials")
-            .upload(filePath, file);
-
-        if (uploadError) {
-          throw uploadError;
-        }
-
-        const { data: publicData } =
-          supabaseClient.storage
-            .from("Materials")
-            .getPublicUrl(filePath);
-
-        const fileUrl =
-          publicData.publicUrl;
-
-        const { error: databaseError } =
-          await supabaseClient
-            .from("Materials")
-            .insert([
-              {
-                title: title,
-                description: description,
-                level: level,
-                kategori: category,
-                file_url: fileUrl
-              }
-            ]);
-
-        if (databaseError) {
-          throw databaseError;
-        }
-
-        showMessage(
-          uploadMessage,
-          "Materyal başarıyla yüklendi.",
-          "success"
-        );
-
-        document
-          .getElementById("material-title")
-          .value = "";
-
-        document
-          .getElementById("material-description")
-          .value = "";
-
-        document
-          .getElementById("material-level")
-          .value = "";
-
-        document
-          .getElementById("material-category")
-          .value = "";
-
-        document
-          .getElementById("material-file")
-          .value = "";
-
-      } catch (error) {
-
-        showMessage(
-          uploadMessage,
-          "Yükleme başarısız: " +
-          error.message,
-          "error"
-        );
-
-      }
-
-      this.disabled = false;
-      this.textContent = "Materyal Yükle";
-    });
-
-
-  /* =========================
-     SEARCH
-  ========================= */
-
-  document
-    .getElementById("searchInput")
-    .addEventListener("input", function () {
-
-      const search =
-        this.value.toLowerCase();
-
-      const cards =
-        document.querySelectorAll(
-          ".material-card"
-        );
-
-      cards.forEach(function (card) {
-
-        const text =
-          card.textContent.toLowerCase();
-
-        card.style.display =
-          text.includes(search)
-            ? "block"
-            : "none";
-      });
-    });
-
-
-  /* =========================
-     LEVEL FILTER
-  ========================= */
-
-  document
-    .querySelectorAll(".level")
-    .forEach(function (button) {
-
-      button.addEventListener(
-        "click",
-        function () {
-
-          const level =
-            this.dataset.level
-              .toLowerCase();
-
-          const cards =
-            document.querySelectorAll(
-              ".material-card"
-            );
-
-          cards.forEach(function (card) {
-
-            const text =
-              card.textContent.toLowerCase();
-
-            card.style.display =
-              text.includes(level)
-                ? "block"
-                : "none";
-          });
-
-          document
-            .getElementById("materials")
-            .scrollIntoView({
-              behavior: "smooth"
-            });
-        }
-      );
-    });
 
 </script>
 
